@@ -42,9 +42,9 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 const io = new Server(httpServer, {
-	cors: {
-		origin: "http://localhost:3000"
-	}
+  cors: {
+    origin: ["https://reach0ut.netlify.app:3000", "http://localhost:3000","https://reach0ut.netlify.app"],
+  },
 });
 
 let activeUsers = [];
@@ -87,8 +87,10 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
-app.use("/assets", express.static(path.join(__dirname, "public/assets")));
+app.use(cors({
+  origin:["https://reach0ut.netlify.app","http://localhost:3000"],
+  credentials:true
+}));app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 //FILE STORAGE
 const storage = multer.diskStorage({
