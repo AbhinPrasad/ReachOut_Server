@@ -46,7 +46,7 @@ export const adminLogin = async (req, res) => {
 
         if (!isMatch) return res.status(400).json({ msg: "Invalid Credentials" })
 
-        const token = jwt.sign({ id: admin._id }, process.env.JWt_SECRET)
+        const token = jwt.sign({ id: admin._id }, process.env.JWT_SECRET)
 
         delete admin.password;
 
