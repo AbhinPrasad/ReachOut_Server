@@ -42,9 +42,13 @@ import { createServer } from "http";
 import { Server } from "socket.io";
 
 const io = new Server(httpServer, {
-  cors: {
-    origin: ["https://ap.codelub.online:3000", "http://localhost:3000","https://ap.codelub.online"],
-  },
+	cors: {
+		origin: [
+			"https://ap.codelub.online:3000",
+			"http://localhost:3000",
+			"https://ap.codelub.online"
+		]
+	}
 });
 
 let activeUsers = [];
@@ -87,8 +91,14 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.options('*', cors());
+// app.use(cors({
+//     origin:["https://ednox.netlify.app","http://localhost:3000"],
+//     credentials:true
+//   }));
+
+app.options("*", cors());
 app.use(cors());
+
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
 //FILE STORAGE
@@ -131,6 +141,8 @@ mongoose
 	})
 	.then(() => {
 		app.listen(PORT, () => console.log(`server port: ${PORT}`));
-		
+		/* ADD DATA ONE TIME */
+		// User.insertMany(users);
+		// Post.insertMany(posts);
 	})
-	.catch((error) => console.log(`${error}did not connect`));
+	.catch((error) => console.log(`${error}did not connect`));
