@@ -43,7 +43,7 @@ import { Server } from "socket.io";
 
 const io = new Server(httpServer, {
   cors: {
-    origin: ["https://reach0ut.netlify.app:3000", "http://localhost:3000","https://reach0ut.netlify.app"],
+    origin: ["https://reachoutt.netlify.app:3000", "http://localhost:3000","https://reachoutt.netlify.app"],
   },
 });
 
@@ -88,7 +88,7 @@ app.use(morgan("common"));
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors({
-  origin:["https://reach0ut.netlify.app","http://localhost:3000"],
+  origin:["https://reachoutt.netlify.app","http://localhost:3000"],
 }));
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
